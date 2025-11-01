@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ca">
+<html lang="es">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Infografía: Classificación IP y redes</title>
+	<title>Infografía: Clasificación IP y redes</title>
 	<style>
 		/* Estil integrat */
 		*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Roboto,Arial,sans-serif}
@@ -26,115 +26,115 @@
 <body>
 	<div class="container">
 		<header class="site-header">
-			<h1>Classificación IP i Configuraciones de red</h1>
-			<p>Infografía i guia pràctica: IPs, màscares, VLAN, VMs, Windows i Linux.</p>
+			<h1>Clasificación IP y Configuraciones de red</h1>
+			<p>Infografía y guía práctica: IPs, máscaras, VLAN, máquinas virtuales, Windows y Linux.</p>
 		</header>
 
-		<nav class="main-nav" aria-label="Navegació principal">
+		<nav class="main-nav" aria-label="Navegación principal">
 			<a href="#intro">Inicio</a>
-			<a href="#ips">Classificación de IPs</a>
-			<a href="#mascaras">Màscares</a>
+			<a href="#ips">Clasificación de IPs</a>
+			<a href="#mascaras">Máscaras</a>
 			<a href="#vlan">VLAN</a>
-			<a href="#vms">Màquinas Virtuales</a>
+			<a href="#vms">Máquinas Virtuales</a>
 			<a href="#windows">Windows</a>
 			<a href="#linux">Linux</a>
 		</nav>
 
 		<section id="intro" class="card" tabindex="-1">
-			<h2>Per començar</h2>
+			<h2>Introducción</h2>
 			<ul>
-				<li>Explicacions i exemples d'adreces per a servidors i gateways.</li>
-				<li>Guias detallades per configurar xarxes en diferents entorns.</li>
-				<li>Afegiu imatges a assets/images amb els noms indicats en les seccions.</li>
-				<li>Aprèn a identificar les necessitats de la teva xarxa i a assignar recursos de manera eficient.</li>
+				<li>Explicaciones y ejemplos de direcciones para servidores y puertas de enlace.</li>
+				<li>Guías detalladas para configurar redes en diferentes entornos.</li>
+				<li>Añade imágenes en <code>assets/images</code> con los nombres indicados en las secciones.</li>
+				<li>Aprende a identificar las necesidades de tu red y asignar recursos de manera eficiente.</li>
 			</ul>
 		</section>
 
 		<section id="ips" class="card" tabindex="-1">
-			<h2>Classificación de IPs</h2>
-			<h3>Classes y rangos importants</h3>
+			<h2>Clasificación de IPs</h2>
+			<h3>Clases y rangos importantes</h3>
 			<ul>
-				<li>Classe A: 1.0.0.0 – 126.255.255.255 (grans xarxes, fins a 16 milions d'hosts).</li>
-				<li>Classe B: 128.0.0.0 – 191.255.255.255 (xarxes mitjanes, fins a 65.000 hosts).</li>
-				<li>Classe C: 192.0.0.0 – 223.255.255.255 (xarxes petites, fins a 254 hosts).</li>
+				<li>Clase A: 1.0.0.0 – 126.255.255.255 (grandes redes, hasta 16 millones de hosts).</li>
+				<li>Clase B: 128.0.0.0 – 191.255.255.255 (redes medianas, hasta 65,000 hosts).</li>
+				<li>Clase C: 192.0.0.0 – 223.255.255.255 (redes pequeñas, hasta 254 hosts).</li>
 			</ul>
-			<h3>Rangos privados (úso habitual)</h3>
+			<h3>Rangos privados (uso habitual)</h3>
 			<ul>
-				<li>10.0.0.0/8: Utilitzat en grans empreses per a xarxes internes.</li>
-				<li>172.16.0.0/12: Ideal per a xarxes mitjanes o departamentals.</li>
-				<li>192.168.0.0/16: Comú en xarxes domèstiques i petites oficines.</li>
+				<li>10.0.0.0/8: Utilizado en grandes empresas para redes internas.</li>
+				<li>172.16.0.0/12: Ideal para redes medianas o departamentales.</li>
+				<li>192.168.0.0/16: Común en redes domésticas y pequeñas oficinas.</li>
 			</ul>
-			<p>Les adreces privades no són accessibles des d'Internet i requereixen NAT per a connexions externes. Això garanteix seguretat i evita conflictes d'adreces públiques.</p>
-			<img src="assets/images/ips-example.png" alt="Exemple IPs" class="resp-img">
+			<p>Las direcciones privadas no son accesibles desde Internet y requieren NAT para conexiones externas.</p>
+			<img src="assets/images/ips-example.png" alt="Ejemplo IPs" class="resp-img">
 		</section>
 
 		<section id="mascaras" class="card" tabindex="-1">
-			<h2>Màscares de red y càlculo</h2>
-			<h3>Conceptes bàsics</h3>
-			<p>La màscara define la parte de la IP que corresponde a la red. Ejemplos comunes:</p>
+			<h2>Máscaras de red y cálculo</h2>
+			<h3>Conceptos básicos</h3>
+			<p>La máscara define la parte de la IP que corresponde a la red. Ejemplos comunes:</p>
 			<ul>
-				<li>/8 → 255.0.0.0 (Classe A, grans xarxes).</li>
-				<li>/16 → 255.255.0.0 (Classe B, xarxes mitjanes).</li>
-				<li>/24 → 255.255.255.0 (Classe C, xarxes petites).</li>
+				<li>/8 → 255.0.0.0 (Clase A, grandes redes).</li>
+				<li>/16 → 255.255.0.0 (Clase B, redes medianas).</li>
+				<li>/24 → 255.255.255.0 (Clase C, redes pequeñas).</li>
 			</ul>
-			<h3>Exemple de càlcul</h3>
+			<h3>Ejemplo de cálculo</h3>
 			<p>IP 192.168.10.0/24 → red: 192.168.10.0, broadcast: 192.168.10.255, hosts: 192.168.10.1–192.168.10.254 (254 hosts).</p>
-			<p>Utilitza eines com <code>ipcalc</code> o calculadores en línia per simplificar el càlcul de subxarxes. Això és especialment útil en xarxes grans amb múltiples subxarxes.</p>
-			<img src="assets/images/mascara-chart.png" alt="Taula màscares" class="resp-img">
+			<p>Utiliza herramientas como <code>ipcalc</code> o calculadoras en línea para simplificar el cálculo de subredes.</p>
+			<img src="assets/images/mascara-chart.png" alt="Tabla máscaras" class="resp-img">
 		</section>
 
 		<section id="vlan" class="card" tabindex="-1">
-			<h2>VLAN — Què és i per què serveix</h2>
-			<p>VLAN = Virtual LAN. Segmenta una mateixa xarxa física en múltiples segments lògics per separar trànsit, millorar seguretat i gestió.</p>
+			<h2>VLAN — Qué es y para qué sirve</h2>
+			<p>VLAN = Virtual LAN. Segmenta una misma red física en múltiples segmentos lógicos para separar tráfico, mejorar seguridad y gestión.</p>
 			<ul>
-				<li>Separar veu (VLAN 10) i dades (VLAN 20).</li>
-				<li>Separar departaments: administració, R+D, convidats.</li>
-				<li>Millorar el rendiment reduint el trànsit de difusió.</li>
+				<li>Separar voz (VLAN 10) y datos (VLAN 20).</li>
+				<li>Separar departamentos: administración, I+D, invitados.</li>
+				<li>Mejorar el rendimiento reduciendo el tráfico de difusión.</li>
 			</ul>
-			<p>Les VLANs es configuren en switches gestionables i requereixen etiquetatge (802.1Q) per a trànsit entre switches. Això permet una millor organització i escalabilitat.</p>
+			<p>Las VLANs se configuran en switches gestionables y requieren etiquetado (802.1Q) para tráfico entre switches.</p>
 			<img src="assets/images/vlan-diagram.png" alt="Diagrama VLAN" class="resp-img">
 		</section>
 
 		<section id="vms" class="card" tabindex="-1">
-			<h2>Xarxa en Màquines Virtuals</h2>
-			<h3>Modes d'adaptador</h3>
+			<h2>Red en Máquinas Virtuales</h2>
+			<h3>Modos de adaptador</h3>
 			<ul>
-				<li>NAT: La VM comparteix la IP de l'amfitrió; accés sortint a Internet.</li>
-				<li>Bridged: La VM apareix a la xarxa física amb la seva pròpia IP.</li>
-				<li>Host-only: Xarxa privada entre host i VMs (sense Internet per defecte).</li>
-				<li>Internal: Xarxa només entre VMs.</li>
+				<li>NAT: La VM comparte la IP del anfitrión; acceso saliente a Internet.</li>
+				<li>Bridged: La VM aparece en la red física con su propia IP.</li>
+				<li>Host-only: Red privada entre host y VMs (sin Internet por defecto).</li>
+				<li>Internal: Red solo entre VMs.</li>
 			</ul>
-			<p>Configura el mode segons les necessitats de la teva xarxa i seguretat. Per exemple, utilitza "Host-only" per a entorns de prova sense risc d'exposició externa.</p>
-			<img src="assets/images/vm-networking.png" alt="Modes VM" class="resp-img">
+			<p>Configura el modo según las necesidades de tu red y seguridad.</p>
+			<img src="assets/images/vm-networking.png" alt="Modos VM" class="resp-img">
 		</section>
 
 		<section id="windows" class="card" tabindex="-1">
-			<h2>Configuració de xarxa en Windows</h2>
+			<h2>Configuración de red en Windows</h2>
 			<h3>GUI (Windows 10/11)</h3>
 			<ol>
-				<li>Obrir Configuració → Xarxa i Internet → Ethernet/Wi‑Fi.</li>
-				<li>Canviar les propietats de l'adaptador → Assignar IP manualment.</li>
+				<li>Abrir Configuración → Red e Internet → Ethernet/Wi‑Fi.</li>
+				<li>Cambiar las propiedades del adaptador → Asignar IP manualmente.</li>
 			</ol>
-			<h3>PowerShell (assignar IP estàtica)</h3>
+			<h3>PowerShell (asignar IP estática)</h3>
 			<pre>
-# Trobar el nom de l'adaptador
+# Encontrar el nombre del adaptador
 Get-NetAdapter
 
-# Assignar IP
+# Asignar IP
 New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.1.50 -PrefixLength 24 -DefaultGateway 192.168.1.1
 
-# Assignar DNS
+# Asignar DNS
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("8.8.8.8","8.8.4.4")
 			</pre>
-			<p>Utilitza PowerShell per automatitzar configuracions en múltiples dispositius, especialment en entorns empresarials.</p>
-			<img src="assets/images/windows-network.png" alt="Windows Network" class="resp-img">
+			<p>Utiliza PowerShell para automatizar configuraciones en múltiples dispositivos.</p>
+			<img src="assets/images/windows-network.png" alt="Red Windows" class="resp-img">
 		</section>
 
 		<section id="linux" class="card" tabindex="-1">
-			<h2>Configuració de xarxa en Linux (Debian i Ubuntu 24.04)</h2>
+			<h2>Configuración de red en Linux (Debian y Ubuntu 24.04)</h2>
 			<h3>Debian (ifupdown — /etc/network/interfaces)</h3>
 			<pre>
-# Exemple /etc/network/interfaces
+# Ejemplo /etc/network/interfaces
 auto eth0
 iface eth0 inet static
     address 192.168.10.20
@@ -158,12 +158,12 @@ network:
 # Aplicar
 sudo netplan apply
 			</pre>
-			<p>Utilitza comandes com <code>ip a</code> i <code>ping</code> per verificar la configuració. Això ajuda a identificar problemes de connectivitat.</p>
-			<img src="assets/images/linux-network.png" alt="Linux Network" class="resp-img">
+			<p>Utiliza comandos como <code>ip a</code> y <code>ping</code> para verificar la configuración.</p>
+			<img src="assets/images/linux-network.png" alt="Red Linux" class="resp-img">
 		</section>
 
 		<footer>
-			<p>Projecte: Activitat 6 — Xarxes. Afegiu imatges a <code>assets/images</code>.</p>
+			<p>Proyecto: Actividad 6 — Redes. Añade imágenes en <code>assets/images</code>.</p>
 		</footer>
 	</div>
 
