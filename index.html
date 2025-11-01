@@ -27,13 +27,13 @@
 	<div class="container">
 		<header class="site-header">
 			<h1>Classificación IP i Configuraciones de red</h1>
-			<p>Infografía i guia pràctica: IPs, màscaras, VLAN, VMs, Windows i Linux.</p>
+			<p>Infografía i guia pràctica: IPs, màscares, VLAN, VMs, Windows i Linux.</p>
 		</header>
 
 		<nav class="main-nav" aria-label="Navegació principal">
 			<a href="#intro">Inicio</a>
 			<a href="#ips">Classificación de IPs</a>
-			<a href="#mascaras">Màscaras</a>
+			<a href="#mascaras">Màscares</a>
 			<a href="#vlan">VLAN</a>
 			<a href="#vms">Màquinas Virtuales</a>
 			<a href="#windows">Windows</a>
@@ -43,143 +43,78 @@
 		<section id="intro" class="card" tabindex="-1">
 			<h2>Per començar</h2>
 			<ul>
-				<li>Explicacionws i ejemples dedirecciones para servidores yw gateways.</li>
-				<li>Guias paso a paso per Packet Tracer, VMware/VirtualBox i configuraciones en Debian/Ubuntu 24.04 i Windows.</li>
+				<li>Explicacions i exemples d'adreces per a servidors i gateways.</li>
+				<li>Guias detallades per configurar xarxes en diferents entorns.</li>
 				<li>Afegiu imatges a assets/images amb els noms indicats en les seccions.</li>
+				<li>Aprèn a identificar les necessitats de la teva xarxa i a assignar recursos de manera eficient.</li>
 			</ul>
 		</section>
 
 		<section id="ips" class="card" tabindex="-1">
 			<h2>Classificación de IPs</h2>
-			<div class="section-nav">
-				<a href="#intro">↑ Inicio</a>
-			</div>
-
-			<h3>Classes y rangos importantes</h3>
+			<h3>Classes y rangos importants</h3>
 			<ul>
-				<li>Classe A: 1.0.0.0 – 255.0.0.0</li>
-				<li>Classe B: 128.0.0.0 – 255.255.0.0</li>
-				<li>Classe C: 192.168.4.6 – 255.255.255.0</li>
+				<li>Classe A: 1.0.0.0 – 126.255.255.255 (grans xarxes, fins a 16 milions d'hosts).</li>
+				<li>Classe B: 128.0.0.0 – 191.255.255.255 (xarxes mitjanes, fins a 65.000 hosts).</li>
+				<li>Classe C: 192.0.0.0 – 223.255.255.255 (xarxes petites, fins a 254 hosts).</li>
 			</ul>
-
 			<h3>Rangos privados (úso habitual)</h3>
 			<ul>
-				<li>10.0.0.0 - 255.0.0.0 </li>
-				<li>172.16.0.0 hasta 172.31.0.0 - 255.255.0.0</li>
-				<li>192.168.0.0 - 255.255.255.0</li> 
+				<li>10.0.0.0/8: Utilitzat en grans empreses per a xarxes internes.</li>
+				<li>172.16.0.0/12: Ideal per a xarxes mitjanes o departamentals.</li>
+				<li>192.168.0.0/16: Comú en xarxes domèstiques i petites oficines.</li>
 			</ul>
-
+			<p>Les adreces privades no són accessibles des d'Internet i requereixen NAT per a connexions externes. Això garanteix seguretat i evita conflictes d'adreces públiques.</p>
 			<img src="assets/images/ips-example.png" alt="Exemple IPs" class="resp-img">
-			<p>Imatge recomanada: <code>ips-example.png</code></p>
 		</section>
 
 		<section id="mascaras" class="card" tabindex="-1">
 			<h2>Màscares de red y càlculo</h2>
-			<div class="section-nav">
-				<a href="#ips">← IPs</a> <a href="#vlan">→ VLAN</a>
-			</div>
-
 			<h3>Conceptes bàsics</h3>
 			<p>La màscara define la parte de la IP que corresponde a la red. Ejemplos comunes:</p>
 			<ul>
-				<li>/8 → 255.0.0.0</li>
-				<li>/16 → 255.255.0.0</li>
-				<li>/24 → 255.255.255.0</li>
+				<li>/8 → 255.0.0.0 (Classe A, grans xarxes).</li>
+				<li>/16 → 255.255.0.0 (Classe B, xarxes mitjanes).</li>
+				<li>/24 → 255.255.255.0 (Classe C, xarxes petites).</li>
 			</ul>
-
-			<h3>Ejemple de càlculo</h3>
+			<h3>Exemple de càlcul</h3>
 			<p>IP 192.168.10.0/24 → red: 192.168.10.0, broadcast: 192.168.10.255, hosts: 192.168.10.1–192.168.10.254 (254 hosts).</p>
-
-			<h3>Subnetting (exemple /26)</h3>
-			<p>/26 → 255.255.255.192 → bloques de 64 direcciones (62 hosts útils). De 192.168.10.0/24 en /26 obtenim 4 subxarxes: 192.168.10.0, .64, .128, .192.</p>
-
-			<pre>
-Ej: IP: 192.168.10.70/26
-Màscara: 255.255.255.192
-Red: 192.168.10.64
-Primer host: 192.168.10.65
-Último host: 192.168.10.126
-Broadcast: 192.168.10.127
-			</pre>
-
+			<p>Utilitza eines com <code>ipcalc</code> o calculadores en línia per simplificar el càlcul de subxarxes. Això és especialment útil en xarxes grans amb múltiples subxarxes.</p>
 			<img src="assets/images/mascara-chart.png" alt="Taula màscares" class="resp-img">
-			<p>Imatge recomanada: <code>mascara-chart.png</code></p>
 		</section>
 
 		<section id="vlan" class="card" tabindex="-1">
 			<h2>VLAN — Què és i per què serveix</h2>
-			<div class="section-nav">
-				<a href="#mascaras">← Màscares</a> <a href="#vms">→ VMs</a>
-			</div>
-
 			<p>VLAN = Virtual LAN. Segmenta una mateixa xarxa física en múltiples segments lògics per separar trànsit, millorar seguretat i gestió.</p>
 			<ul>
 				<li>Separar veu (VLAN 10) i dades (VLAN 20).</li>
 				<li>Separar departaments: administració, R+D, convidats.</li>
+				<li>Millorar el rendiment reduint el trànsit de difusió.</li>
 			</ul>
-
-			<h3>Configuració bàsica en Cisco (Packet Tracer)</h3>
-			<pre>
-Switch> enable
-Switch# configure terminal
-Switch(config)# vlan 10
-Switch(config-vlan)# name VOICE
-Switch(config)# interface FastEthernet0/1
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport access vlan 10
-			</pre>
-			<p>Per trunks:</p>
-			<pre>
-Switch(config)# interface GigabitEthernet0/1
-Switch(config-if)# switchport mode trunk
-Switch(config-if)# switchport trunk allowed vlan 10,20
-			</pre>
-
+			<p>Les VLANs es configuren en switches gestionables i requereixen etiquetatge (802.1Q) per a trànsit entre switches. Això permet una millor organització i escalabilitat.</p>
 			<img src="assets/images/vlan-diagram.png" alt="Diagrama VLAN" class="resp-img">
-			<p>Imatge recomanada: <code>vlan-diagram.png</code></p>
 		</section>
 
 		<section id="vms" class="card" tabindex="-1">
 			<h2>Xarxa en Màquines Virtuals</h2>
-			<div class="section-nav">
-				<a href="#vlan">← VLAN</a> <a href="#windows">→ Windows</a>
-			</div>
-
 			<h3>Modes d'adaptador</h3>
 			<ul>
-				<li>NAT: la VM comparteix la IP de l'amfitrió; accés sortint a Internet.</li>
-				<li>Bridged (Pont): la VM apareix a la xarxa física amb la seva pròpia IP.</li>
-				<li>Host-only: xarxa privada entre host i VMs (sense Internet per defecte).</li>
-				<li>Internal: xarxa només entre VMs.</li>
+				<li>NAT: La VM comparteix la IP de l'amfitrió; accés sortint a Internet.</li>
+				<li>Bridged: La VM apareix a la xarxa física amb la seva pròpia IP.</li>
+				<li>Host-only: Xarxa privada entre host i VMs (sense Internet per defecte).</li>
+				<li>Internal: Xarxa només entre VMs.</li>
 			</ul>
-
-			<h3>Exemple: assignar IP estàtica amb netplan</h3>
-			<pre>
-network:
-  version: 2
-  ethernets:
-    enp0s3:
-      addresses: [192.168.56.10/24]
-      gateway4: 192.168.56.1
-      nameservers:
-        addresses: [8.8.8.8,8.8.4.4]
-			</pre>
-
+			<p>Configura el mode segons les necessitats de la teva xarxa i seguretat. Per exemple, utilitza "Host-only" per a entorns de prova sense risc d'exposició externa.</p>
 			<img src="assets/images/vm-networking.png" alt="Modes VM" class="resp-img">
 		</section>
 
 		<section id="windows" class="card" tabindex="-1">
 			<h2>Configuració de xarxa en Windows</h2>
-			<div class="section-nav">
-				<a href="#vms">← VMs</a> <a href="#linux">→ Linux</a>
-			</div>
-
 			<h3>GUI (Windows 10/11)</h3>
 			<ol>
 				<li>Obrir Configuració → Xarxa i Internet → Ethernet/Wi‑Fi.</li>
 				<li>Canviar les propietats de l'adaptador → Assignar IP manualment.</li>
 			</ol>
-
 			<h3>PowerShell (assignar IP estàtica)</h3>
 			<pre>
 # Trobar el nom de l'adaptador
@@ -191,16 +126,12 @@ New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.1.50 -PrefixLengt
 # Assignar DNS
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("8.8.8.8","8.8.4.4")
 			</pre>
-
+			<p>Utilitza PowerShell per automatitzar configuracions en múltiples dispositius, especialment en entorns empresarials.</p>
 			<img src="assets/images/windows-network.png" alt="Windows Network" class="resp-img">
 		</section>
 
 		<section id="linux" class="card" tabindex="-1">
 			<h2>Configuració de xarxa en Linux (Debian i Ubuntu 24.04)</h2>
-			<div class="section-nav">
-				<a href="#windows">← Windows</a> <a href="#intro">↑ Inici</a>
-			</div>
-
 			<h3>Debian (ifupdown — /etc/network/interfaces)</h3>
 			<pre>
 # Exemple /etc/network/interfaces
@@ -211,7 +142,6 @@ iface eth0 inet static
     gateway 192.168.10.1
     dns-nameservers 8.8.8.8 8.8.4.4
 			</pre>
-
 			<h3>Ubuntu 24.04 (netplan)</h3>
 			<pre>
 # /etc/netplan/01-network.yaml
@@ -228,13 +158,12 @@ network:
 # Aplicar
 sudo netplan apply
 			</pre>
-
-			<p>Comprovar: <code>ip a</code>, <code>ip route</code>, <code>ping 8.8.8.8</code></p>
+			<p>Utilitza comandes com <code>ip a</code> i <code>ping</code> per verificar la configuració. Això ajuda a identificar problemes de connectivitat.</p>
 			<img src="assets/images/linux-network.png" alt="Linux Network" class="resp-img">
 		</section>
 
 		<footer>
-			<p>Projecte: Activitat 6 — Xarxes. Afegiu imatges a <code>assets/images</code> amb noms recomanats: ips-example.png, mascara-chart.png, vlan-diagram.png, vm-networking.png, windows-network.png, linux-network.png</p>
+			<p>Projecte: Activitat 6 — Xarxes. Afegiu imatges a <code>assets/images</code>.</p>
 		</footer>
 	</div>
 
