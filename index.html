@@ -26,16 +26,16 @@
 <body>
 	<div class="container">
 		<header class="site-header">
-			<h1>Classificació IP i Configuracions de Xarxa</h1>
-			<p>Infografia i guia pràctica: IPs, màscares, VLAN, VMs, Windows i Linux.</p>
+			<h1>Classificación IP i Configuraciones de red</h1>
+			<p>Infografía i guia pràctica: IPs, màscaras, VLAN, VMs, Windows i Linux.</p>
 		</header>
 
 		<nav class="main-nav" aria-label="Navegació principal">
-			<a href="#intro">Inici</a>
-			<a href="#ips">Classificació IP</a>
-			<a href="#mascaras">Màscares</a>
+			<a href="#intro">Inicio</a>
+			<a href="#ips">Classificación de IPs</a>
+			<a href="#mascaras">Màscaras</a>
 			<a href="#vlan">VLAN</a>
-			<a href="#vms">Màquines Virtuals</a>
+			<a href="#vms">Màquinas Virtuales</a>
 			<a href="#windows">Windows</a>
 			<a href="#linux">Linux</a>
 		</nav>
@@ -43,37 +43,30 @@
 		<section id="intro" class="card" tabindex="-1">
 			<h2>Per començar</h2>
 			<ul>
-				<li>Explicacions i exemples d'adreces per a servidors i gateways.</li>
-				<li>Guies pas a pas per Packet Tracer, VMware/VirtualBox i configuracions en Debian/Ubuntu 24.04 i Windows.</li>
+				<li>Explicacionws i ejemples dedirecciones para servidores yw gateways.</li>
+				<li>Guias paso a paso per Packet Tracer, VMware/VirtualBox i configuraciones en Debian/Ubuntu 24.04 i Windows.</li>
 				<li>Afegiu imatges a assets/images amb els noms indicats en les seccions.</li>
 			</ul>
 		</section>
 
 		<section id="ips" class="card" tabindex="-1">
-			<h2>Classificació d'IPs</h2>
+			<h2>Classificación de IPs</h2>
 			<div class="section-nav">
-				<a href="#intro">↑ Inici</a>
+				<a href="#intro">↑ Inicio</a>
 			</div>
 
-			<h3>Classes i rangs importants</h3>
+			<h3>Classes y rangos importantes</h3>
 			<ul>
 				<li>Classe A: 1.0.0.0 – 255.0.0.0</li>
 				<li>Classe B: 128.0.0.0 – 255.255.0.0</li>
 				<li>Classe C: 192.168.4.6 – 255.255.255.0</li>
 			</ul>
 
-			<h3>Rangs privats (ús habitual)</h3>
+			<h3>Rangos privados (úso habitual)</h3>
 			<ul>
 				<li>10.0.0.0 - 255.0.0.0 </li>
 				<li>172.16.0.0 hasta 172.31.0.0 - 255.255.0.0</li>
 				<li>192.168.0.0 - 255.255.255.0</li> 
-			</ul>
-
-			<h3>Quines IPs per servidors i gateways?</h3>
-			<ul>
-				<li>Servidors: adreces fixes dins del rang privat (ex: 10.0.0.10).</li>
-				<li>Gateway (porta d'enllaç): adreça fixa del router de la subxarxa (ex: 192.168.1.1).</li>
-				<li>Bones pràctiques: reservar rangs estàtics per servidors i un altre per DHCP.</li>
 			</ul>
 
 			<img src="assets/images/ips-example.png" alt="Exemple IPs" class="resp-img">
@@ -87,25 +80,25 @@
 			</div>
 
 			<h3>Conceptes bàsics</h3>
-			<p>La màscara defineix la part de la IP que correspon a la xarxa. Exemples comuns:</p>
+			<p>La màscara define la parte de la IP que corresponde a la red. Ejemplos comunes:</p>
 			<ul>
 				<li>/8 → 255.0.0.0</li>
 				<li>/16 → 255.255.0.0</li>
 				<li>/24 → 255.255.255.0</li>
 			</ul>
 
-			<h3>Exemple de càlcul</h3>
-			<p>IP 192.168.10.0/24 → xarxa: 192.168.10.0, broadcast: 192.168.10.255, hosts: 192.168.10.1–192.168.10.254 (254 hosts).</p>
+			<h3>Ejemple de càlculo</h3>
+			<p>IP 192.168.10.0/24 → red: 192.168.10.0, broadcast: 192.168.10.255, hosts: 192.168.10.1–192.168.10.254 (254 hosts).</p>
 
 			<h3>Subnetting (exemple /26)</h3>
-			<p>/26 → 255.255.255.192 → blocs de 64 adreces (62 hosts útils). De 192.168.10.0/24 en /26 obtenim 4 subxarxes: 192.168.10.0, .64, .128, .192.</p>
+			<p>/26 → 255.255.255.192 → bloques de 64 direcciones (62 hosts útils). De 192.168.10.0/24 en /26 obtenim 4 subxarxes: 192.168.10.0, .64, .128, .192.</p>
 
 			<pre>
-Ex: IP: 192.168.10.70/26
+Ej: IP: 192.168.10.70/26
 Màscara: 255.255.255.192
-Xarxa: 192.168.10.64
+Red: 192.168.10.64
 Primer host: 192.168.10.65
-Últim host: 192.168.10.126
+Último host: 192.168.10.126
 Broadcast: 192.168.10.127
 			</pre>
 
