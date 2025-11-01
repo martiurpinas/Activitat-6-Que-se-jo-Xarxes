@@ -33,7 +33,7 @@
 			</ul>
 		</section>
 
-		<section id="ips" class="card hidden" tabindex="-1">
+		<section id="ips" class="card" tabindex="-1">
 			<h2>Clasificación de IPs</h2>
 			<h3>Clases y rangos importantes</h3>
 			<ul>
@@ -51,7 +51,7 @@
 			<img src="assets/images/ips-example.png" alt="Ejemplo IPs" class="resp-img">
 		</section>
 
-		<section id="mascaras" class="card hidden" tabindex="-1">
+		<section id="mascaras" class="card" tabindex="-1">
 			<h2>Máscaras de red y cálculo</h2>
 			<h3>Conceptos básicos</h3>
 			<p>La máscara define la parte de la IP que corresponde a la red. Ejemplos comunes:</p>
@@ -66,7 +66,7 @@
 			<img src="assets/images/mascara-chart.png" alt="Tabla máscaras" class="resp-img">
 		</section>
 
-		<section id="vlan" class="card hidden" tabindex="-1">
+		<section id="vlan" class="card" tabindex="-1">
 			<h2>VLAN — Qué es y para qué sirve</h2>
 			<p>VLAN = Virtual LAN. Segmenta una misma red física en múltiples segmentos lógicos para separar tráfico, mejorar seguridad y gestión.</p>
 			<ul>
@@ -78,7 +78,7 @@
 			<img src="assets/images/vlan-diagram.png" alt="Diagrama VLAN" class="resp-img">
 		</section>
 
-		<section id="vms" class="card hidden" tabindex="-1">
+		<section id="vms" class="card" tabindex="-1">
 			<h2>Red en Máquinas Virtuales</h2>
 			<h3>Modos de adaptador</h3>
 			<ul>
@@ -91,7 +91,7 @@
 			<img src="assets/images/vm-networking.png" alt="Modos VM" class="resp-img">
 		</section>
 
-		<section id="windows" class="card hidden" tabindex="-1">
+		<section id="windows" class="card" tabindex="-1">
 			<h2>Configuración de red en Windows</h2>
 			<h3>GUI (Windows 10/11)</h3>
 			<ol>
@@ -113,7 +113,7 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("8.8.8.8
 			<img src="assets/images/windows-network.png" alt="Red Windows" class="resp-img">
 		</section>
 
-		<section id="linux" class="card hidden" tabindex="-1">
+		<section id="linux" class="card" tabindex="-1">
 			<h2>Configuración de red en Linux (Debian y Ubuntu 24.04)</h2>
 			<h3>Debian (ifupdown — /etc/network/interfaces)</h3>
 			<pre>
@@ -151,14 +151,14 @@ sudo netplan apply
 	</div>
 
 	<script>
-		// Mostrar solo la sección activa según location.hash
+		// Mostrar solo la sección activa segons location.hash
 		function showSection() {
 			const sections = document.querySelectorAll('section[id]');
 			const hash = location.hash || '#intro';
 			sections.forEach(s => {
 				s.classList.toggle('hidden', ('#' + s.id) !== hash);
 			});
-			// marcar enlace activo
+			// marcar enlace actiu
 			document.querySelectorAll('.main-nav a').forEach(a => {
 				a.classList.toggle('active', a.getAttribute('href') === hash);
 			});
