@@ -62,8 +62,8 @@
 				<a href="#ips">← IPs</a> <a href="#vlan">→ VLAN</a>
 			</div>
 
-			<h3>Conceptes bàsics</h3>
-			<p>La màscara defineix la part de la IP que correspon a la xarxa. Exemples comuns:</p>
+			<h3>Conceptos bàsicos</h3>
+			<p>La màscara define la parte de la IP que corresponde a la red. Ejemplos comunes:</p>
 			<ul>
 				<li>/8 → 255.0.0.0</li>
 				<li>/16 → 255.255.0.0</li>
@@ -118,7 +118,7 @@ Switch(config-if)# switchport mode trunk
 Switch(config-if)# switchport trunk allowed vlan 10,20
 			</pre>
 
-			<img src="assets/images/vlan-diagram.png" alt="Diagrama VLAN" class="resp-img">
+			<img src="Fotos/Red_institucional.jpg" alt="Diagrama VLAN" class="resp-img">
 			<p>Imatge recomanada: <code>vlan-diagram.png</code></p>
 		</section>
 
@@ -128,12 +128,12 @@ Switch(config-if)# switchport trunk allowed vlan 10,20
 				<a href="#vlan">← VLAN</a> <a href="#windows">→ Windows</a>
 			</div>
 
-			<h3>Modes d'adaptador</h3>
+			<h3>Modos d'adaptador</h3>
 			<ul>
 				<li>NAT: la VM comparte la IP de l'amfitrión; accéso saliendo a Internet.</li>
 				<li>Bridged (Pont): la VM aparece a la red física amb la seva pròpia IP.</li>
-				<li>Host-only: xarxa privada entre host i VMs (sense Internet per defecte).</li>
-				<li>Internal: xarxa només entre VMs.</li>
+				<li>Host-only: red privada entre host i VMs (sin Internet per defecto).</li>
+				<li>Internal: red solo entre VMs.</li>
 			</ul>
 
 			<h3>Ejemplo: assignar IP estàtica con netplan</h3>
