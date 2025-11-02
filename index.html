@@ -4,24 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Infografia: Classificació IP i Xarxes</title>
-	<style>
-		/* Estil integrat */
-		*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Roboto,Arial,sans-serif}
-		body{background:#f6f8fa;color:#111;line-height:1.5;padding:20px}
-		.container{max-width:1100px;margin:0 auto}
-		.site-header{text-align:center;margin-bottom:18px}
-		.main-nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
-		.main-nav a{background:#0b5fff;color:#fff;padding:8px 12px;border-radius:6px;text-decoration:none;font-weight:600}
-		.main-nav a.active{box-shadow:0 0 0 3px rgba(11,95,255,0.12)}
-		.card{background:#fff;padding:16px;border-radius:8px;box-shadow:0 2px 6px rgba(10,10,10,.06);margin-bottom:16px}
-		.resp-img{max-width:100%;height:auto;border-radius:6px;margin-top:8px}
-		.hidden{display:none !important}
-		pre{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;overflow:auto;margin-top:8px}
-		code{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-family:monospace}
-		.section-nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
-		.section-nav a{color:#0b5fff;text-decoration:none}
-		footer{text-align:center;margin-top:24px;color:#555;font-size:.9rem}
-	</style>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<div class="container">
@@ -31,11 +14,11 @@
 		</header>
 
 		<nav class="main-nav" aria-label="Navegació principal">
-			<a href="#intro">Inici</a>
-			<a href="#ips">Classificació IP</a>
-			<a href="#mascaras">Màscares</a>
+			<a href="#intro">Inicio</a>
+			<a href="#ips">Classificación IP</a>
+			<a href="#mascaras">Màscaras</a>
 			<a href="#vlan">VLAN</a>
-			<a href="#vms">Màquinas Virtuals</a>
+			<a href="#vms">Màquinas Virtuales</a>
 			<a href="#windows">Windows</a>
 			<a href="#linux">Linux</a>
 		</nav>
@@ -43,9 +26,9 @@
 		<section id="intro" class="card" tabindex="-1">
 			<h2>Per començar</h2>
 			<ul>
-				<li>Explicacions i exemples d'adreces per a servidors i gateways.</li>
-				<li>Guies pas a pas per Packet Tracer, VMware/VirtualBox i configuracions en Debian/Ubuntu 24.04 i Windows.</li>
-				<li>Afegiu imatges a assets/images amb els noms indicats en les seccions.</li>
+				<li>Explicaciones y ejemplos de direcciones para a servidores y gateways.</li>
+				<li>Guias paso a paso con el Packet Tracer, VMware/VirtualBox i configuraciones en Debian/Ubuntu 24.04 y Windows.</li>
+				<li>Añadir imagenes a assets/images amb els nombres indicados en las secciones.</li>
 			</ul>
 		</section>
 
@@ -112,13 +95,13 @@ Broadcast: 192.168.10.127
 				<a href="#mascaras">← Màscares</a> <a href="#vms">→ VMs</a>
 			</div>
 
-			<p>VLAN = Virtual LAN. Segmenta una mateixa xarxa física en múltiples segments lògics per separar trànsit, millorar seguretat i gestió.</p>
+			<p>VLAN = Virtual LAN. Segmenta una misma red física en múltiples segmentos lògicos para separar trànsito, mejorar seguredad y gestión.</p>
 			<ul>
-				<li>Separar veu (VLAN 10) i dades (VLAN 20).</li>
-				<li>Separar departaments: administració, R+D, convidats.</li>
+				<li>Separar veu (VLAN 10) i datos (VLAN 20).</li>
+				<li>Separar departamentos: administración, R+D, invitados.</li>
 			</ul>
 
-			<h3>Configuració bàsica en Cisco (Packet Tracer)</h3>
+			<h3>Configuración bàsica en Cisco (Packet Tracer)</h3>
 			<pre>
 Switch> enable
 Switch# configure terminal
@@ -140,20 +123,20 @@ Switch(config-if)# switchport trunk allowed vlan 10,20
 		</section>
 
 		<section id="vms" class="card" tabindex="-1">
-			<h2>Xarxa en Màquines Virtuals</h2>
+			<h2>Red en Màquinas Virtuales</h2>
 			<div class="section-nav">
 				<a href="#vlan">← VLAN</a> <a href="#windows">→ Windows</a>
 			</div>
 
 			<h3>Modes d'adaptador</h3>
 			<ul>
-				<li>NAT: la VM comparteix la IP de l'amfitrió; accés sortint a Internet.</li>
-				<li>Bridged (Pont): la VM apareix a la xarxa física amb la seva pròpia IP.</li>
+				<li>NAT: la VM comparte la IP de l'amfitrión; accéso saliendo a Internet.</li>
+				<li>Bridged (Pont): la VM aparece a la red física amb la seva pròpia IP.</li>
 				<li>Host-only: xarxa privada entre host i VMs (sense Internet per defecte).</li>
 				<li>Internal: xarxa només entre VMs.</li>
 			</ul>
 
-			<h3>Exemple: assignar IP estàtica amb netplan</h3>
+			<h3>Ejemplo: assignar IP estàtica con netplan</h3>
 			<pre>
 network:
   version: 2
@@ -169,20 +152,20 @@ network:
 		</section>
 
 		<section id="windows" class="card" tabindex="-1">
-			<h2>Configuració de xarxa en Windows</h2>
+			<h2>Configuración de red en Windows</h2>
 			<div class="section-nav">
 				<a href="#vms">← VMs</a> <a href="#linux">→ Linux</a>
 			</div>
 
 			<h3>GUI (Windows 10/11)</h3>
 			<ol>
-				<li>Obrir Configuració → Xarxa i Internet → Ethernet/Wi‑Fi.</li>
-				<li>Canviar les propietats de l'adaptador → Assignar IP manualment.</li>
+				<li>Obrir Configuración → Red y Internet → Ethernet/Wi‑Fi.</li>
+				<li>Cambiar las propiedades de l'adaptador → Assignar IP manualmente.</li>
 			</ol>
 
 			<h3>PowerShell (assignar IP estàtica)</h3>
 			<pre>
-# Trobar el nom de l'adaptador
+# Encontrar el nombre del adaptador
 Get-NetAdapter
 
 # Assignar IP
@@ -196,7 +179,7 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("8.8.8.8
 		</section>
 
 		<section id="linux" class="card" tabindex="-1">
-			<h2>Configuració de xarxa en Linux (Debian i Ubuntu 24.04)</h2>
+			<h2>Configuración de red en Linux (Debian i Ubuntu 24.04)</h2>
 			<div class="section-nav">
 				<a href="#windows">← Windows</a> <a href="#intro">↑ Inici</a>
 			</div>
