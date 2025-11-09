@@ -219,20 +219,21 @@ sudo netplan apply
 	</div>
 
 	<script>
-		// Desplazar a la sección seleccionada sin ocultar las demás
-		function scrollToSection() {
+		// Mostrar solo la sección activa según location.hash
+		function showSection() {
+			const sections = document.querySelectorAll('section[id]');
 			const hash = location.hash || '#intro';
-			const target = document.querySelector(hash);
-			if (target) {
-				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			}
+			sections.forEach(s => {
+				// Mostrar solo la sección activa y ocultar las demás
+				s.style.display = ('#' + s.id) === hash ? 'block' : 'none';
+			});
 			// Marcar enlace activo
 			document.querySelectorAll('.main-nav a').forEach(a => {
 				a.classList.toggle('active', a.getAttribute('href') === hash);
 			});
 		}
-		window.addEventListener('hashchange', scrollToSection);
-		window.addEventListener('DOMContentLoaded', scrollToSection);
+		window.addEventListener('hashchange', showSection);
+		window.addEventListener('DOMContentLoaded', showSection);
 	</script>
 </body>
 </html>
