@@ -23,7 +23,7 @@
 			<a href="#linux">Linux</a>
 		</nav>
 
-		<section id="intro" class="card" tabindex="-1">
+		<section id="intro" class="card page" tabindex="-1">
 			<h2>Bienvenido</h2>
 			<p>Esta guía práctica te ayudará a entender los conceptos fundamentales de redes, desde la clasificación de direcciones IP hasta la configuración de redes en diferentes sistemas operativos.</p>
 			
@@ -38,7 +38,7 @@
 			</ul>
 		</section>
 
-		<section id="ips" class="card" tabindex="-1">
+		<section id="ips" class="card page hidden" tabindex="-1">
 			<h2>Clasificación de IPs</h2>
 			<div class="section-nav">
 				<a href="#intro">↑ Inicio</a> <a href="#mascaras">→ Máscaras</a>
@@ -66,7 +66,7 @@
 			<p>Imatge recomanada: <code>ips-example.png</code></p>
 		</section>
 
-		<section id="mascaras" class="card" tabindex="-1">
+		<section id="mascaras" class="card page hidden" tabindex="-1">
 			<h2>Máscaras de red</h2>
 			<div class="section-nav">
 				<a href="#ips">← IPs</a> <a href="#vlan">→ VLAN</a>
@@ -98,7 +98,7 @@ Broadcast: 192.168.10.127
 			</pre>
 		</section>
 			
-		<section id="vlan" class="card" tabindex="-1">
+		<section id="vlan" class="card page hidden" tabindex="-1">
 			<h2>VLAN</h2>
 			<div class="section-nav">
 				<a href="#mascaras">← Màscaras</a> <a href="#vms">→ VMs</a>
@@ -130,7 +130,7 @@ Switch(config-if)# switchport trunk allowed vlan 10,20
 			<img src="Fotos/Red_institucional.jpg" alt="Diagrama VLAN" class="resp-img">
 		</section>
 
-		<section id="vms" class="card" tabindex="-1">
+		<section id="vms" class="card page hidden" tabindex="-1">
 			<h2>Red en Máquinas Virtuales</h2>
 			<div class="section-nav">
 				<a href="#vlan">← VLAN</a> <a href="#windows">→ Windows</a>
@@ -157,7 +157,7 @@ Switch(config-if)# switchport trunk allowed vlan 10,20
 			<img src="Fotos/Captura de pantalla 2025-11-02 222055.png" alt="Modos de red en Máquinas Virtuales" class="resp-img">
 		</section>
 
-		<section id="windows" class="card" tabindex="-1">
+		<section id="windows" class="card page hidden" tabindex="-1">
 			<h2>Configuración de red en Windows</h2>
 			<div class="section-nav">
 				<a href="#vms">← VMs</a> <a href="#linux">→ Linux</a>
@@ -190,7 +190,7 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("8.8.8.8
 			<p><strong>Nota:</strong> Ejecuta PowerShell como administrador para realizar estos cambios.</p>
 		</section>
 
-		<section id="linux" class="card" tabindex="-1">
+		<section id="linux" class="card page hidden" tabindex="-1">
 			<h2>Configuración de red en Linux</h2>
 			<div class="section-nav">
 				<a href="#windows">← Windows</a> <a href="#intro">↑ Inicio</a>
@@ -251,17 +251,63 @@ sudo netplan apply
 		</footer>
 	</div>
 
+	<style>
+		.page {
+			display: block;
+		}
+		.page.hidden {
+			display: none;
+		}
+	</style>
+
 	<script>
-		// Desplazar suavemente a las secciones cuando se hace clic en los enlaces
+		// Función para mostrar solo la sección activa
+		function showPage(pageId) {
+			// Ocultar todas las páginas
+			document.querySelectorAll('.page').forEach(page => {
+				page.classList.add('hidden');
+			});
+			
+			// Mostrar la página seleccionada
+			const targetPage = document.querySelector(pageId);
+			if (targetPage) {
+				targetPage.classList.remove('hidden');
+			}
+			
+			// Actualizar enlaces activos en la navegación
+			document.querySelectorAll('.main-nav a').forEach(link => {
+				link.classList.remove('active');
+				if (link.getAttribute('href') === pageId) {
+					link.classList.add('active');
+				}
+			});
+			
+			// Scroll al inicio de la página
+			window.scrollTo(0, 0);
+		}
+		
+		// Manejar clics en enlaces de navegación
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 			anchor.addEventListener('click', function (e) {
 				e.preventDefault();
-				const target = document.querySelector(this.getAttribute('href'));
-				if (target) {
-					target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-				}
+				const targetId = this.getAttribute('href');
+				showPage(targetId);
+				// Actualizar la URL sin recargar la página
+				history.pushState(null, null, targetId);
 			});
 		});
+		
+		// Mostrar la página según el hash de la URL al cargar
+		function showPageFromHash() {
+			const hash = window.location.hash || '#intro';
+			showPage(hash);
+		}
+		
+		// Manejar cambios en el hash de la URL (botones atrás/adelante)
+		window.addEventListener('hashchange', showPageFromHash);
+		
+		// Inicializar al cargar la página
+		window.addEventListener('DOMContentLoaded', showPageFromHash);
 	</script>
 </body>
 </html>
