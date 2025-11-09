@@ -97,8 +97,8 @@ Broadcast: 192.168.10.127
 			<p>Las VLANs (Virtual Local Area Network) permiten segmentar una misma red física en múltiples segmentos lógicos. A continuación encontrarás una explicación de las VLANs y su configuración básica.</p>
 
 			<h3>¿Qué son y para qué sirven?</h3>
-			<p>VLAN = Virtual Local Area Network. Segmenta una misma red física en múltiples segmentos lógicos para separar tráfico, mejorar seguridad y gestión.</p>
-			<br>
+			<p>VLAN = Virtual Local Area Network. Segmenta una misma red física en múltiples segmentos lógicos para separar tráfico, mejorar seguridad y gestión. Esto permite crear redes virtuales independientes dentro de una misma infraestructura física.</p>
+
 			<h3>Configuración básica en Cisco (Packet Tracer)</h3>
 			<pre>
 Switch> enable
@@ -109,7 +109,8 @@ Switch(config)# interface FastEthernet0/1
 Switch(config-if)# switchport mode access
 Switch(config-if)# switchport access vlan 10
 			</pre>
-			<p>Per trunks:</p>
+			<h3>Configuración de trunks (enlaces entre switches)</h3>
+			<p>Para conectar switches y permitir que múltiples VLANs pasen por el mismo enlace:</p>
 			<pre>
 Switch(config)# interface GigabitEthernet0/1
 Switch(config-if)# switchport mode trunk
@@ -130,27 +131,21 @@ Switch(config-if)# switchport trunk allowed vlan 10,20
 			
 			<h3>Modos de adaptador más utilizados:</h3>
 			<ul>
-				<li>Modo NAT: la VM comparte la IP del anfitrión; accéso saliendo a Internet.</li>
-				<li>Modo Bridged (puente): la VM aparece a la red física con su propia IP.</li>
-				<li>Modo Host-only: red privada entre host i VMs (sin internet por defecto).</li>
-				<li>Modo Internal: red solo entre VMs.</li>
+				<li><strong>Modo NAT:</strong> La VM comparte la IP del anfitrión; tiene acceso saliente a Internet. Es el modo más común para uso general.</li>
+				<li><strong>Modo Bridged (puente):</strong> La VM aparece en la red física con su propia IP, como si fuera un dispositivo físico más en la red.</li>
+				<li><strong>Modo Host-only:</strong> Red privada entre el host y las VMs (sin internet por defecto). Útil para pruebas aisladas.</li>
+				<li><strong>Modo Internal:</strong> Red solo entre VMs, sin acceso al host ni a Internet. Ideal para crear redes de prueba completamente aisladas.</li>
 			</ul>
 
-			<h3>Ejemplo: assignar IP estàtica con netplan</h3>
-			<pre>
-network:
-  version: 2
-  ethernets:
-    enp0s3:
-      addresses: [192.168.56.10/24]
-      gateway4: 192.168.56.1
-      nameservers:
-        addresses: [8.8.8.8,8.8.4.4]
-			</pre>
-			<br>
-			<br>
-			<p>Los diferentes modos de red que hay y que existen en las Máquinas Virtuales</p>
-			<img src="Fotos/Captura de pantalla 2025-11-02 222055.png" alt="Modes VM" class="resp-img">
+			<h3>Ejemplo práctico: Configuración en VirtualBox</h3>
+			<p>Para configurar el modo de red en VirtualBox:</p>
+			<ol>
+				<li>Selecciona la VM → Configuración → Red</li>
+				<li>Elige el adaptador y selecciona el modo deseado (NAT, Bridged, Host-only, Internal)</li>
+				<li>Para Host-only, puedes configurar una red privada en Archivo → Preferencias → Red</li>
+			</ol>
+
+			<img src="Fotos/Captura de pantalla 2025-11-02 222055.png" alt="Modos de red en Máquinas Virtuales" class="resp-img">
 		</section>
 
 		<section id="windows" class="card" tabindex="-1">
@@ -161,24 +156,29 @@ network:
 
 			<p>Esta guía te ayudará a asignar IPs estáticas en Windows, tanto mediante la interfaz gráfica como mediante PowerShell.</p>
 
-			<h3>GUI (Windows 10/11)</h3>
+			<h3>Método 1: Interfaz gráfica (Windows 10/11)</h3>
 			<ol>
-				<li>Abrir configuración → Red y internet → Ethernet/Wi‑Fi.</li>
-				<li>Cambiar las propiedades del adaptador → Asignar IP manualmente.</li>
+				<li>Abrir <strong>Configuración</strong> → <strong>Red e Internet</strong> → <strong>Ethernet</strong> o <strong>Wi‑Fi</strong>.</li>
+				<li>Hacer clic en el adaptador de red activo.</li>
+				<li>Desplazarse hasta <strong>Configuración de IP</strong> y hacer clic en <strong>Editar</strong>.</li>
+				<li>Seleccionar <strong>Manual</strong> y activar <strong>IPv4</strong>.</li>
+				<li>Introducir la IP estática, máscara de subred, puerta de enlace y DNS.</li>
+				<li>Guardar los cambios.</li>
 			</ol>
 
-			<h3>PowerShell (assignar IP estàtica)</h3>
+			<h3>Método 2: PowerShell (línea de comandos)</h3>
+			<p>Para asignar una IP estática mediante PowerShell:</p>
 			<pre>
 # Encontrar el nombre del adaptador
 Get-NetAdapter
 
-# Assignar IP
+# Asignar IP estática
 New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.1.50 -PrefixLength 24 -DefaultGateway 192.168.1.1
 
-# Assignar DNS
+# Asignar servidores DNS
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("8.8.8.8","8.8.4.4")
 			</pre>
-			<br>	
+			<p><strong>Nota:</strong> Ejecuta PowerShell como administrador para realizar estos cambios.</p>
 		</section>
 
 		<section id="linux" class="card" tabindex="-1">
@@ -189,20 +189,31 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("8.8.8.8
 
 			<p>Esta guía te ayudará a asignar IPs estáticas en Linux, cubriendo tanto Debian (con ifupdown) como Ubuntu 24.04 (con netplan).</p>
 
-			<h3>Debian (ifupdown — /etc/network/interfaces)</h3>
+			<h3>Método 1: Debian (ifupdown — /etc/network/interfaces)</h3>
+			<p>Para sistemas basados en Debian que usan ifupdown:</p>
 			<pre>
-# Exemple /etc/network/interfaces
+# Editar el archivo de configuración
+sudo nano /etc/network/interfaces
+
+# Ejemplo de configuración:
 auto eth0
 iface eth0 inet static
     address 192.168.10.20
     netmask 255.255.255.0
     gateway 192.168.10.1
     dns-nameservers 8.8.8.8 8.8.4.4
+
+# Reiniciar el servicio de red
+sudo systemctl restart networking
 			</pre>
 
-			<h3>Ubuntu 24.04 (netplan)</h3>
+			<h3>Método 2: Ubuntu 24.04 (netplan)</h3>
+			<p>Para sistemas que usan netplan (Ubuntu 18.04+):</p>
 			<pre>
-# /etc/netplan/01-network.yaml
+# Editar el archivo de configuración
+sudo nano /etc/netplan/01-network.yaml
+
+# Ejemplo de configuración:
 network:
   version: 2
   ethernets:
@@ -213,11 +224,17 @@ network:
       nameservers:
         addresses: [8.8.8.8,8.8.4.4]
 
-# Aplicar
+# Aplicar la configuración
 sudo netplan apply
 			</pre>
 
-			<p>Comprovar: <code>ip a</code>, <code>ip route</code>, <code>ping 8.8.8.8</code></p>
+			<h3>Verificar la configuración</h3>
+			<p>Después de configurar, verifica que todo funcione correctamente:</p>
+			<ul>
+				<li><code>ip a</code> - Muestra las direcciones IP configuradas</li>
+				<li><code>ip route</code> - Muestra la tabla de enrutamiento</li>
+				<li><code>ping 8.8.8.8</code> - Prueba la conectividad a Internet</li>
+			</ul>
 		</section>
 
 		<footer>
