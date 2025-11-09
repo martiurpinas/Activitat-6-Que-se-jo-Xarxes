@@ -160,32 +160,7 @@ Switch(config-if)# switchport trunk allowed vlan 10,20
 				<a href="#vms">← VMs</a> <a href="#linux">→ Linux</a>
 			</div>
 
-			<p>Esta guía te ayudará a asignar IPs estáticas en Windows, tanto mediante la interfaz gráfica como mediante PowerShell.</p>
-
-			<h3>Método 1: Interfaz gráfica (Windows 10/11)</h3>
-			<ol>
-				<li>Abrir <strong>Configuración</strong> → <strong>Red e Internet</strong> → <strong>Ethernet</strong> o <strong>Wi‑Fi</strong>.</li>
-				<li>Hacer clic en el adaptador de red activo.</li>
-				<li>Desplazarse hasta <strong>Configuración de IP</strong> y hacer clic en <strong>Editar</strong>.</li>
-				<li>Seleccionar <strong>Manual</strong> y activar <strong>IPv4</strong>.</li>
-				<li>Introducir la IP estática, máscara de subred, puerta de enlace y DNS.</li>
-				<li>Guardar los cambios.</li>
-			</ol>
-
-			<h3>Método 2: PowerShell (línea de comandos)</h3>
-			<p>Para asignar una IP estática mediante PowerShell:</p>
-			<pre>
-# Encontrar el nombre del adaptador
-Get-NetAdapter
-
-# Asignar IP estática
-New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.1.50 -PrefixLength 24 -DefaultGateway 192.168.1.1
-
-# Asignar servidores DNS
-Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("8.8.8.8","8.8.4.4")
-			</pre>
-			<p><strong>Nota:</strong> Ejecuta PowerShell como administrador para realizar estos cambios.</p>
-		</section>
+			<p>En este apartado no sabemos y/o no tenemos los conocimientos necesarios para hacer la configuración de red en Windows.</p>
 
 		<section id="linux" class="card page hidden" tabindex="-1">
 			<h2>Configuración de red en Linux</h2>
