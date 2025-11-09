@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ca">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Configuración de red en Linux - Infografía Redes</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<header class="site-header">
+			<h1>Clasificación IP y Configuraciones de red</h1>
+			<p>Infografía y guia pràctica: IPs, máscaras, VLAN, VMs, Windows y Linux.</p>
+		</header>
+
+		<nav class="main-nav" aria-label="Navegació principal">
+			<a href="index.html">Inicio</a>
+			<a href="ips.html">Clasificación IP</a>
+			<a href="mascaras.html">Máscaras</a>
+			<a href="vlan.html">VLAN</a>
+			<a href="vms.html">Màquinas Virtuales</a>
+			<a href="windows.html">Windows</a>
+			<a href="linux.html" class="active">Linux</a>
+		</nav>
+
+		<section id="linux" class="card" tabindex="-1">
+			<h2>Configuración de red en Linux</h2>
+			<div class="section-nav">
+				<a href="windows.html">← Windows</a> <a href="index.html">↑ Inicio</a>
+			</div>
+
+			<p>Esta guía te ayudará a asignar IPs estáticas en Linux, cubriendo tanto Debian (con ifupdown) como Ubuntu 24.04 (con netplan).</p>
+
+			<h3>Método 1: Debian (ifupdown — /etc/network/interfaces)</h3>
+			<p>Para sistemas basados en Debian que usan ifupdown:</p>
+			<pre>
+# Editar el archivo de configuración
+sudo nano /etc/network/interfaces
+
+# Ejemplo de configuración:
+auto eth0
+iface eth0 inet static
+    address 192.168.10.20
+    netmask 255.255.255.0
+    gateway 192.168.10.1
+    dns-nameservers 8.8.8.8 8.8.4.4
+
+# Reiniciar el servicio de red
+sudo systemctl restart networking
+			</pre>
+
+			<h3>Método 2: Ubuntu 24.04 (netplan)</h3>
+			<p>Para sistemas que usan netplan (Ubuntu 18.04+):</p>
+			<pre>
+# Editar el archivo de configuración
+sudo nano /etc/netplan/01-network.yaml
+
+# Ejemplo de configuración:
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: no
+      addresses: [192.168.10.30/24]
+      gateway4: 192.168.10.1
+      nameservers:
+        addresses: [8.8.8.8,8.8.4.4]
+
+# Aplicar la configuración
+sudo netplan apply
+			</pre>
+
+			<h3>Verificar la configuración</h3>
+			<p>Después de configurar, verifica que todo funcione correctamente:</p>
+			<ul>
+				<li><code>ip a</code> - Muestra las direcciones IP configuradas</li>
+				<li><code>ip route</code> - Muestra la tabla de enrutamiento</li>
+				<li><code>ping 8.8.8.8</code> - Prueba la conectividad a Internet</li>
+			</ul>
+		</section>
+
+		<footer>
+			<p>Projecte: Activitat 6 — Xarxes. Afegiu imatges a <code>assets/images</code> amb noms recomanats: ips-example.png, mascara-chart.png, vlan-diagram.png, vm-networking.png, windows-network.png, linux-network.png</p>
+		</footer>
+	</div>
+</body>
+</html>
+
