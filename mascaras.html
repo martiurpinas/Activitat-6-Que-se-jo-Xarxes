@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ca">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Máscaras de red - Infografía Redes</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<header class="site-header">
+			<h1>Clasificación IP y Configuraciones de red</h1>
+			<p>Infografía y guia pràctica: IPs, máscaras, VLAN, VMs, Windows y Linux.</p>
+		</header>
+
+		<nav class="main-nav" aria-label="Navegació principal">
+			<a href="index.html">Inicio</a>
+			<a href="ips.html">Clasificación IP</a>
+			<a href="mascaras.html" class="active">Máscaras</a>
+			<a href="vlan.html">VLAN</a>
+			<a href="vms.html">Màquinas Virtuales</a>
+			<a href="windows.html">Windows</a>
+			<a href="linux.html">Linux</a>
+		</nav>
+
+		<section id="mascaras" class="card" tabindex="-1">
+			<h2>Máscaras de red</h2>
+			<div class="section-nav">
+				<a href="ips.html">← IPs</a> <a href="vlan.html">→ VLAN</a>
+			</div>
+
+			<p>Las máscaras de red son fundamentales para entender cómo se divide una dirección IP entre la parte de red y la parte de host. A continuación encontrarás una explicación detallada de las máscaras de red y cómo calcularlas.</p>
+
+			<h3>Conceptos básicos:</h3>
+			<p>La máscara define la parte de la IP que corresponde a la red. Ejemplos comunes:</p>
+			<ul>
+				<li>/8 → 255.0.0.0</li>
+				<li>/16 → 255.255.0.0</li>
+				<li>/24 → 255.255.255.0</li>
+			</ul>
+
+			<h3>Ejemplo de cálculo:</h3>
+			<p>IP 192.168.10.0/24 → xarxa: 192.168.10.0, broadcast: 192.168.10.255, hosts: 192.168.10.1–192.168.10.254 (254 hosts).</p>
+
+			<h3>Subnetting (exemple /26)</h3>
+			<p>/26 → 255.255.255.192 → blocs de 64 adreces (62 hosts útils). De 192.168.10.0/24 en /26 obtenim 4 subxarxes: 192.168.10.0, .64, .128, .192.</p>
+
+			<pre>
+Ej: IP: 192.168.10.70/26
+Máscara: 255.255.255.192
+Red: 192.168.10.64
+Primer host: 192.168.10.65
+Último host: 192.168.10.126
+Broadcast: 192.168.10.127
+			</pre>
+		</section>
+
+		<footer>
+			<p>Projecte: Activitat 6 — Xarxes. Afegiu imatges a <code>assets/images</code> amb noms recomanats: ips-example.png, mascara-chart.png, vlan-diagram.png, vm-networking.png, windows-network.png, linux-network.png</p>
+		</footer>
+	</div>
+</body>
+</html>
+
